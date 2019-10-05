@@ -18,9 +18,12 @@ router.get("/:code", (req,res) => {
   function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
       var info = JSON.parse(body);
-      //console.log(info);
       res.json(info);
     }
+    else { 
+      var xx = JSON.parse(body).errors;
+      res.status(404).json(xx.message);
+    } 
   }  
  
   request(options, callback);

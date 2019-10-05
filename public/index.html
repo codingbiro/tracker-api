@@ -33,9 +33,10 @@
             $("#asd1qq").html(data.data.segments[0].stats.deaths.displayValue);
             $("#hideable").show();
           },
-          error: function(xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            alert(err.Message);
+          error: function(){
+              var textASD = "The player either hasn't played CSGO or their profile is private. Make sure you are entering the right ID!";
+              $('#cpos').prepend(`<div id="d-${cc}" class="uk-alert-danger uk-animation-shake" uk-alert style=""><a class="uk-alert-close" uk-close></a><p>${textASD}</p></div>`);
+              cc++;
           },
           type: 'GET',          
           url: myUrl         
@@ -48,7 +49,7 @@
 
 <body>
   <div id="cpos" class="uk-container uk-margin-top uk-margin-bottom">
-    <h1 class="uk-heading-divider">Tracker API</h1>
+    <h1 class="uk-heading-divider">CSGO Tracker API</h1>
     <div class="uk-card uk-card-hover">
         <div class="uk-card-body">
             <div class="uk-card-badge uk-label">New</div>
