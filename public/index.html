@@ -17,13 +17,14 @@
       var cc = 0;      
       $("#submit").click(function () {        
         playerId = $("#playerId").val();
-        var myUrl = `https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${playerId}`;
+        var myUrl = `/api/${playerId}`;
         $.ajax({
           contentType: 'application/json',
-          data: JSON.stringify({ "TRN-Api-Key": "f9f6c99b-acb4-4017-a1d3-afef1d035ebc" }),
           dataType: 'json',
           success: function(data){
-            console.log(data);
+            $("#imgp").attr("src", data.platformInfo.avatarUrl);
+            $("#postt").html(data.platformInfo.platformUserHandle);
+            $("#asd1qq").html(data.segments[0].stats.deaths);
           },  
           type: 'GET',          
           url: myUrl         
@@ -58,7 +59,26 @@
           </div>
       </div>
     <hr class="uk-divider-icon">
-    <h3><span class="uk-text-primary">Your stat:</span> <u><a id="pos" class="uk-link-heading" href="#" target="_blank"></a></u></h3>  
+    <h3><span class="uk-text-primary">Your stat:</span> </h3>
+    <div class="uk-card uk-card-default uk-width-1-2@m">
+      <div class="uk-card-header">
+          <div class="uk-grid-small uk-flex-middle" uk-grid>
+              <div class="uk-width-auto">
+                  <img class="uk-border-circle" width="40" height="40" src="" id="imgp">
+              </div>
+              <div class="uk-width-expand">
+                  <h3 class="uk-card-title uk-margin-remove-bottom" id="postt"></h3>
+                  <!--p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00" id="asd1q">April 01, 2016</time></p-->
+              </div>
+          </div>
+      </div>
+      <div class="uk-card-body">
+          <p id="asd1qq"></p>
+      </div>
+      <div class="uk-card-footer">
+          <a href="#" class="uk-button uk-button-text">Read more</a>
+      </div>
+  </div>
     <div id="xcpos" class="uk-container uk-margin-top uk-margin-bottom"></div>
   </div>
 </body>

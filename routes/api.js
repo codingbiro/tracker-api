@@ -4,81 +4,30 @@ const config = require('config');
 
 const Url = require('../models/Stat');
 
-// @route     POST /api/url/shorten
-// @desc      Create short URL
-router.post('/shorten', async (req, res) => {
-  var { longUrl } = req.body;
-  var customShortUrl;
-  var filtered = "true";
-  if (req.query.custom) {
-    customShortUrl = req.query.custom;
-    filtered = req.query.filter;
-  } else{
-    customShortUrl = null;}
+var request = require('request');
 
-
-  const baseUrl = config.get('baseUrl');
-
-  // Check base url
-  if (!validator.isURL(baseUrl)) {
-    return res.status(401).json('Invalid base url');
-  }
-
-  // Create url code
-  var urlCode;
-  if (customShortUrl == null)
-    urlCode = generate(furl, 5);
-  else
-    urlCode = customShortUrl;
-
-  var myStr = "http://";
-
-  if (longUrl.substring(0, 4) === "http");
-  else {
-    myStr += longUrl;
-    longUrl = myStr;
-  }
-
-  var shortUrl;
-
-  // Check long url
-  if (validator.isURL(longUrl)) {
-    try {
-      let customNeed = await Url.findOne({ urlCode });
-      if (customNeed) {
-        res.status(401).json('Short URL already taken.');
-      }
-      else {
-        var url;
-        if(filtered==="true") {
-          url = await Url.findOne({ longUrl });
-        }
-        else {
-          url=null;
-        }
-        if(url) {
-          res.status(205).json(url);
-        } else {
-          shortUrl = baseUrl + '/' + urlCode;
-
-          url = new Url({
-            longUrl,
-            shortUrl,
-            urlCode,
-            date: new Date()
-          });
-
-          await url.save();
-
-          res.json(url);
-        }
-      }
-    } catch (err) {
-      res.status(500).json('Server error');
+router.get("/:code", (req,res) => {
+  var code = req.params.code;
+  var options = {
+    url: `https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${code}`,
+    headers: {
+      'TRN-Api-Key': 'f9f6c99b-acb4-4017-a1d3-afef1d035ebc'
     }
-  } else {
-    res.status(401).json('Invalid long url');
-  }
+  };
+   
+  function callback(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var info = JSON.parse(body);
+      //console.log(info);
+      res.json(info);
+    }
+  }  
+ 
+  request(options, callback);
+
+  
+  
 });
+
 
 module.exports = router;
