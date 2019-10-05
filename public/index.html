@@ -17,6 +17,11 @@
       var cc = 0;      
       $("#submit").click(function () {        
         playerId = $("#playerId").val();
+        if(playerId=""){
+          $('#cpos').prepend(`<div id="d-${cc}" class="uk-alert-danger uk-animation-shake" uk-alert style=""><a class="uk-alert-close" uk-close></a><p>Add user ID!</p></div>`);
+          cc++;
+          return;
+        }
         var myUrl = `/api/${playerId}`;
         $.ajax({
           contentType: 'application/json',
