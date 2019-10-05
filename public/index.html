@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tracker @birovince</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="uikit.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="uikit.min.js"></script>
+  <script src="uikit-icons.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>    
+    $(document).ready(function () {
+      var playerId;
+      var cc = 0;      
+      $("#submit").click(function () {        
+        playerId = $("#playerId").val();
+        var myUrl = `https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${playerId}`;
+        $.ajax({
+          contentType: 'application/json',
+          data: JSON.stringify({ "TRN-Api-Key": "f9f6c99b-acb4-4017-a1d3-afef1d035ebc" }),
+          dataType: 'json',
+          complete: function (xhr, textStatus) {
+            if(xhr.status==200) {
+              var strxx = xhr.responseJSON;              
+              $("#pos").html(strxx);
+              $("#pos").attr("href", xhr.responseJSON.shortUrl);              
+              //$('#xcpos').prepend(`<div id="d-${cc}" class="uk-alert-success" uk-alert style=""><a class="uk-alert-close" uk-close></a><p>Link successfully created.</p></div>`);              
+              cc++;
+            } else {
+              //$('#xcpos').prepend(`<div id="d-${cc}" class="uk-alert-danger" uk-alert style=""><a class="uk-alert-close" uk-close></a><p><span id="ispan-${count}"></span></p></div>`);
+              //$(`#ispan-${count}`).html("Warning! This link has already been shortened. In the options you can ignore this multiplication filter.");                           
+              cc++;
+            }
+          },
+          processData: false,          
+          type: 'GET',          
+          url: myUrl         
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="cpos" class="uk-container uk-margin-top uk-margin-bottom">
+    <h1 class="uk-heading-divider">Tracker API</h1>
+    <div class="uk-card uk-card-hover">
+        <div class="uk-card-body">
+            <div class="uk-card-badge uk-label">New</div>
+            <input class="uk-input uk-form-blank uk-form-width-medium" placeholder="Enter player ID" type="text" id="playerId"><br>
+            <!--input class="uk-input uk-form-blank uk-form-width-medium" placeholder="Enter custom short URL" type="url" id=""><br-->          
+        </div>
+        <div class="uk-card-footer">              
+            <div class="uk-grid uk-grid-medium" uk-grid style="margin-left: 0px!important;">
+              <input class="uk-button uk-button-primary" type="button" id="submit" value="Submit">
+              <!--div class="uk-width-auto">
+                <label class="uk-switch" for="myFilterx">
+                  <input type="checkbox" id="myFilterx" checked>
+                  <div class="uk-switch-slider"></div>
+                </label>            
+              </div>
+              <div class="uk-width-expand">
+                <small>Shortcode multiplication filter (for custom shortcodes)</small>
+              </div-->
+            </div>
+          </div>
+      </div>
+    <hr class="uk-divider-icon">
+    <h3><span class="uk-text-primary">Your stat:</span> <u><a id="pos" class="uk-link-heading" href="#" target="_blank"></a></u></h3>  
+    <div id="xcpos" class="uk-container uk-margin-top uk-margin-bottom"></div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "tracker-api",
+  "version": "1.0.0",
+  "description": "tracker api",
+  "main": "index.js",
+  "scripts": {
+    "test": "dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingbiro/tracker-api.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codingbiro/tracker-api/issues"
+  },
+  "homepage": "https://github.com/codingbiro/tracker-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

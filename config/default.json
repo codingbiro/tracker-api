@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb+srv://biro:asd@cluster0-dx3so.mongodb.net/test?retryWrites=true&w=majority",
+  "baseUrl": "https://gg.codingbi.ro",
+  "key": "f9f6c99b-acb4-4017-a1d3-afef1d035ebc"
+} 
