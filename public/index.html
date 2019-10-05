@@ -22,20 +22,9 @@
           contentType: 'application/json',
           data: JSON.stringify({ "TRN-Api-Key": "f9f6c99b-acb4-4017-a1d3-afef1d035ebc" }),
           dataType: 'json',
-          complete: function (xhr, textStatus) {
-            if(xhr.status==200) {
-              var strxx = xhr.responseJSON;              
-              $("#pos").html(strxx);
-              $("#pos").attr("href", xhr.responseJSON.shortUrl);              
-              //$('#xcpos').prepend(`<div id="d-${cc}" class="uk-alert-success" uk-alert style=""><a class="uk-alert-close" uk-close></a><p>Link successfully created.</p></div>`);              
-              cc++;
-            } else {
-              //$('#xcpos').prepend(`<div id="d-${cc}" class="uk-alert-danger" uk-alert style=""><a class="uk-alert-close" uk-close></a><p><span id="ispan-${count}"></span></p></div>`);
-              //$(`#ispan-${count}`).html("Warning! This link has already been shortened. In the options you can ignore this multiplication filter.");                           
-              cc++;
-            }
-          },
-          processData: false,          
+          success: function(data){
+            console.log(data);
+          },  
           type: 'GET',          
           url: myUrl         
         });
