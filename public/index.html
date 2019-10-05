@@ -13,11 +13,12 @@
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script>    
     $(document).ready(function () {
+      $("#hideable").hide();
       var playerId;
       var cc = 0;      
       $("#submit").click(function () {        
         playerId = $("#playerId").val();
-        if(playerId=""){
+        if(playerId==""){
           $('#cpos').prepend(`<div id="d-${cc}" class="uk-alert-danger uk-animation-shake" uk-alert style=""><a class="uk-alert-close" uk-close></a><p>Add user ID!</p></div>`);
           cc++;
           return;
@@ -30,10 +31,16 @@
             $("#imgp").attr("src", data.data.platformInfo.avatarUrl);
             $("#postt").html(data.data.platformInfo.platformUserHandle);
             $("#asd1qq").html(data.data.segments[0].stats.deaths.displayValue);
-          },  
+            $("#hideable").show();
+          },
+          error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+          },
           type: 'GET',          
           url: myUrl         
         });
+        
       });
     });
   </script>
@@ -65,7 +72,7 @@
       </div>
     <hr class="uk-divider-icon">
     <h3><span class="uk-text-primary">Your stat:</span> </h3>
-    <div class="uk-card uk-card-default uk-width-1-2@m">
+    <div class="uk-card uk-card-default uk-width-1-2@m" id="hideable">
       <div class="uk-card-header">
           <div class="uk-grid-small uk-flex-middle" uk-grid>
               <div class="uk-width-auto">
