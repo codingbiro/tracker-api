@@ -22,10 +22,9 @@
           contentType: 'application/json',
           dataType: 'json',
           success: function(data){            
-            console.log(data.data.segments[0].stats.deaths);
             $("#imgp").attr("src", data.data.platformInfo.avatarUrl);
             $("#postt").html(data.data.platformInfo.platformUserHandle);
-            $("#asd1qq").html(data.data.segments[0].stats.deaths);
+            $("#asd1qq").html(data.data.segments[0].stats.deaths.displayValue);
           },  
           type: 'GET',          
           url: myUrl         
@@ -74,7 +73,7 @@
           </div>
       </div>
       <div class="uk-card-body">
-          <p id="asd1qq"></p>
+          <h3>Deaths: </h3><p id="asd1qq"></p>
       </div>
       <div class="uk-card-footer">
           <a href="#" class="uk-button uk-button-text">Read more</a>
