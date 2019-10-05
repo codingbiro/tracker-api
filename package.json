@@ -4,7 +4,7 @@
   "description": "tracker api",
   "main": "index.js",
   "scripts": {
-    "test": "dev"
+    "test": "nodemon index"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/codingbiro/tracker-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "config": "^3.2.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.3",
+    "nodemon": "^1.19.3"
   }
 }
