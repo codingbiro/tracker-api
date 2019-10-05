@@ -22,6 +22,7 @@
           contentType: 'application/json',
           dataType: 'json',
           success: function(data){            
+            console.log(data.data.segments[0].stats.deaths);
             $("#imgp").attr("src", data.data.platformInfo.avatarUrl);
             $("#postt").html(data.data.platformInfo.platformUserHandle);
             $("#asd1qq").html(data.data.segments[0].stats.deaths);
